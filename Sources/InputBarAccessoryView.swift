@@ -40,7 +40,7 @@ open class InputBarAccessoryView: UIView {
     open var backgroundView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = InputBarAccessoryView.defaultBackgroundColor
+        view.backgroundColor = .red
         return view
     }()
 
