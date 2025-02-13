@@ -19,31 +19,66 @@ final class iMessageInputBar: InputBarAccessoryView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    func configure() {
-        inputTextView.textContainerInset = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 36)
-        inputTextView.placeholderLabelInsets = UIEdgeInsets(top: 8, left: 20, bottom: 8, right: 36)
-        if #available(iOS 13, *) {
-            inputTextView.layer.borderColor = UIColor.systemGray2.cgColor
-        } else {
-            inputTextView.layer.borderColor = UIColor.lightGray.cgColor
+    private func makeButton(named: String) -> InputBarButtonItem {
+        return InputBarButtonItem()
+            .configure {
+                $0.spacing = .fixed(0)
+                $0.image = UIImage(named: named)?.withRenderingMode(.alwaysTemplate)
+                $0.setSize(CGSize(width: 24, height: 24), animated: false)
+            }.onSelected {
+                $0.tintColor = .systemBlue
+            }.onDeselected {
+                $0.tintColor = UIColor.lightGray
+            }.onTouchUpInside { _ in
+                print("Item Tapped")
         }
-        inputTextView.layer.borderWidth = 1.0
-        inputTextView.layer.cornerRadius = 16.0
-        inputTextView.layer.masksToBounds = true
-        inputTextView.scrollIndicatorInsets = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
-        setRightStackViewWidthConstant(to: 38, animated: false)
-        setStackViewItems([sendButton, InputBarButtonItem.fixedSpace(2)], forStack: .right, animated: false)
-        sendButton.imageView?.backgroundColor = tintColor
-        sendButton.contentEdgeInsets = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
-        sendButton.setSize(CGSize(width: 36, height: 36), animated: false)
-        sendButton.image = #imageLiteral(resourceName: "ic_up")
-        sendButton.title = nil
-        sendButton.imageView?.layer.cornerRadius = 16
-        sendButton.backgroundColor = .clear
-        middleContentViewPadding.right = -38
-        separatorLine.isHidden = true
-        isTranslucent = true
     }
     
+    func configure() {
+//        inputTextView.textContainerInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
+//        inputTextView.placeholderLabelInsets = UIEdgeInsets(top: 8, left: 5, bottom: 8, right: 5)
+//        self.middleContentViewWrapper.layer.borderWidth = 1.0
+//        self.middleContentViewWrapper.layer.cornerRadius = 16.0
+//        self.middleContentViewWrapper.layer.masksToBounds = true
+//        self.middleContentViewWrapper.layer.borderColor = UIColor.init(hex: "#232329").cgColor
+//        padding  = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+//        middleContentViewPadding = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+//        leftStackViewWidthConstant = 0
+        
+        inputTextView.placeholderTextColor = .init(hex: "#81838A")
+        
+        separatorLine.isHidden = true
+        let items = [
+            makeButton(named: "ic_camera").onTextViewDidChange { button, textView in
+                button.isEnabled = textView.text.isEmpty
+                }.onSelected {
+                    $0.tintColor = .systemBlue
+            },
+            makeButton(named: "ic_camera").onTextViewDidChange { button, textView in
+                button.isEnabled = textView.text.isEmpty
+                }.onSelected {
+                    $0.tintColor = .systemBlue
+            },
+            makeButton(named: "ic_camera").onTextViewDidChange { button, textView in
+                button.isEnabled = textView.text.isEmpty
+                }.onSelected {
+                    $0.tintColor = .systemBlue
+                },
+            sendButton.onSelected {
+                    // We use a transform becuase changing the size would cause the other views to relayout
+                    $0.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+                }.onDeselected {
+                    $0.transform = CGAffineTransform.identity
+            }
+        ]
+        setStackViewItems(items, forStack: .right, animated: false)
+        rightStackView.backgroundColor = .red
+        rightStackView.alignment = .center
+    }
+    
+}
+extension iMessageInputBar: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    }
 }

@@ -60,6 +60,8 @@ open class InputBarButtonItem: UIButton, InputItem {
             switch spacing {
             case .flexible:
                 setContentHuggingPriority(UILayoutPriority(rawValue: 1), for: .horizontal)
+//                setContentHuggingPriority(UILayoutPriority(rawValue: 1000), for: .horizontal)
+//                setContentCompressionResistancePriority(UILayoutPriority(rawValue: 10000), for: .horizontal)
             case .fixed:
                 setContentHuggingPriority(UILayoutPriority(rawValue: 1000), for: .horizontal)
             case .none:
@@ -69,7 +71,7 @@ open class InputBarButtonItem: UIButton, InputItem {
     }
     
     /// When not nil this size overrides the intrinsicContentSize
-    private var size: CGSize? = CGSize(width: 20, height: 20) {
+    private var size: CGSize? = CGSize(width: 24, height: 24) {
         didSet {
             invalidateIntrinsicContentSize()
         }

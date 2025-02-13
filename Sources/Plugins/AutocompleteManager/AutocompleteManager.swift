@@ -101,9 +101,9 @@ open class AutocompleteManager: NSObject, InputPlugin, UITextViewDelegate, UITab
     open var defaultTextAttributes: [NSAttributedString.Key: Any] = {
         var foregroundColor: UIColor
         if #available(iOS 13, *) {
-            foregroundColor = .label
+            foregroundColor = .init(hex: "#F9F9FA")
         } else {
-            foregroundColor = .black
+            foregroundColor = .init(hex: "#F9F9FA")
         }
         return [.font: UIFont.preferredFont(forTextStyle: .body), .foregroundColor: foregroundColor]
     }()
