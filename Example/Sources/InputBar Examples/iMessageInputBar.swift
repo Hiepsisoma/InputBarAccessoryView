@@ -34,6 +34,27 @@ final class iMessageInputBar: InputBarAccessoryView {
         }
     }
     
+    private func makeViewButton(named: String) -> InputBarViewButton {
+        let inputBarViewButton =  InputBarViewButton()
+            .configure {
+                $0.spacing = .fixed(0)
+//                $0.image = UIImage(named: named)?.withRenderingMode(.alwaysTemplate)
+//                $0.setSize(CGSize(width: 94, height: 32), animated: false)
+            }.onSelected {
+                $0.tintColor = .systemBlue
+            }.onDeselected {
+                $0.tintColor = UIColor.lightGray
+            }.onTouchUpInside { _ in
+                print("HungPT Item Tapped")
+            }
+        inputBarViewButton.customImageView.image =  UIImage(named: "ninja")
+        inputBarViewButton.customLabel.text =  named
+        
+        return inputBarViewButton
+    }
+    
+    
+    
     func configure() {
 //        inputTextView.textContainerInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
 //        inputTextView.placeholderLabelInsets = UIEdgeInsets(top: 8, left: 5, bottom: 8, right: 5)
@@ -58,11 +79,6 @@ final class iMessageInputBar: InputBarAccessoryView {
                 button.isEnabled = textView.text.isEmpty
                 }.onSelected {
                     $0.tintColor = .systemBlue
-            },
-            makeButton(named: "ic_camera").onTextViewDidChange { button, textView in
-                button.isEnabled = textView.text.isEmpty
-                }.onSelected {
-                    $0.tintColor = .systemBlue
                 },
             sendButton.onSelected {
                     // We use a transform becuase changing the size would cause the other views to relayout
@@ -71,9 +87,25 @@ final class iMessageInputBar: InputBarAccessoryView {
                     $0.transform = CGAffineTransform.identity
             }
         ]
+        
+        let itemsTop = [
+            makeViewButton(named: "Outfits").onTextViewDidChange { button, textView in
+                button.isEnabled = textView.text.isEmpty
+                }.onSelected {
+                    $0.tintColor = .systemBlue
+            },
+            makeViewButton(named: "Actions").onTextViewDidChange { button, textView in
+                button.isEnabled = textView.text.isEmpty
+                }.onSelected {
+                    $0.tintColor = .systemBlue
+            },
+        ]
         setStackViewItems(items, forStack: .right, animated: false)
-        rightStackView.backgroundColor = .red
         rightStackView.alignment = .center
+        setStackViewItems(itemsTop, forStack: .top, animated: false)
+        topStackView.alignment = .center
+        padding = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 16)
+        topStackView.axis = .horizontal
     }
     
 }
