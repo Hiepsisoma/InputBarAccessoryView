@@ -121,7 +121,7 @@ open class InputBarAccessoryView: UIView {
      2. It's alignment is initially set to .fill
      */
     public let topStackView: InputStackView = {
-        let stackView = InputStackView(axis: .vertical, spacing: 0)
+        let stackView = InputStackView(axis: .vertical, spacing: 12)
         stackView.alignment = .fill
         return stackView
     }()
@@ -167,7 +167,7 @@ open class InputBarAccessoryView: UIView {
     public let middleContentViewWrapper: UIView = {
         let view = UIView()
         view.layer.borderWidth = 1.0
-        view.layer.cornerRadius = 24
+        view.layer.cornerRadius = 30
         view.layer.masksToBounds = true
         view.layer.borderColor = UIColor.init(hex: "#232329").cgColor
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -274,7 +274,7 @@ open class InputBarAccessoryView: UIView {
      ````
      
      */
-    open var middleContentViewPadding: UIEdgeInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16) {
+    open var middleContentViewPadding: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0) {
         didSet {
             updateMiddleContentViewPadding()
         }
@@ -497,8 +497,7 @@ open class InputBarAccessoryView: UIView {
         topStackViewLayoutSet = NSLayoutConstraintSet(
             top:    topStackView.topAnchor.constraint(equalTo: topAnchor, constant: topStackViewPadding.top),
             bottom: topStackView.bottomAnchor.constraint(equalTo: contentView.topAnchor, constant: -padding.top),
-            left:   topStackView.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: topStackViewPadding.left + frameInsets.left),
-            right:  topStackView.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -(topStackViewPadding.right + frameInsets.right))
+            left:   topStackView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: padding.left)
         )
         
         contentViewLayoutSet = NSLayoutConstraintSet(
@@ -517,9 +516,9 @@ open class InputBarAccessoryView: UIView {
         )
         
         middleTextContentViewLayoutSet =  NSLayoutConstraintSet(
-            top:    inputTextView.topAnchor.constraint(equalTo: middleContentViewWrapper.topAnchor, constant: 4),
-            bottom: inputTextView.bottomAnchor.constraint(equalTo: middleContentViewWrapper.bottomAnchor, constant: -4),
-            left:   inputTextView.leftAnchor.constraint(equalTo: middleContentViewWrapper.leftAnchor, constant: 12),
+            top:    inputTextView.topAnchor.constraint(equalTo: middleContentViewWrapper.topAnchor, constant: 12),
+            bottom: inputTextView.bottomAnchor.constraint(equalTo: middleContentViewWrapper.bottomAnchor, constant: -12),
+            left:   inputTextView.leftAnchor.constraint(equalTo: middleContentViewWrapper.leftAnchor, constant: 16),
             right:  inputTextView.rightAnchor.constraint(equalTo: rightStackView.leftAnchor, constant: -4)
         )
         
@@ -534,7 +533,7 @@ open class InputBarAccessoryView: UIView {
         )
         
         rightStackViewLayoutSet = NSLayoutConstraintSet(
-            right:  rightStackView.rightAnchor.constraint(equalTo: middleContentViewWrapper.rightAnchor, constant: -12),
+            right:  rightStackView.rightAnchor.constraint(equalTo: middleContentViewWrapper.rightAnchor, constant: -16),
             centerY: rightStackView.centerYAnchor.constraint(equalTo: middleContentViewWrapper.centerYAnchor)
         )
         
