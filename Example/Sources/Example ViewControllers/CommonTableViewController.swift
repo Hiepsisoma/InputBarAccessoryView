@@ -96,6 +96,7 @@ class CommonTableViewController: UIViewController, UITableViewDataSource, UITabl
 //        autocompleteManager.paragraphStyle.baseWritingDirection = .rightToLeft
 //        inputBar.inputTextView.textAlignment = .right
 //        inputBar.inputTextView.placeholderLabel.textAlignment = .right
+        inputBar.topStackViewPadding = UIEdgeInsets(top: 50, left: 0, bottom: 0, right: 0)
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

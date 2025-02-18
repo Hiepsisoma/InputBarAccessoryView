@@ -340,6 +340,8 @@ open class InputBarAccessoryView: UIView {
     public var items: [InputItem] {
         return [leftStackViewItems, rightStackViewItems, bottomStackViewItems, topStackViewItems, nonStackViewItems].flatMap { $0 }
     }
+    
+    public var actionView = UIView()
 
     // MARK: - Auto-Layout Constraint Sets
 
@@ -441,6 +443,10 @@ open class InputBarAccessoryView: UIView {
         middleContentViewWrapper.addSubview(inputTextView)
         middleContentView = inputTextView
         setStackViewItems([sendButton], forStack: .right, animated: false)
+        
+        actionView = UIView(frame: CGRect(x: 0, y: 0, width: 300, height: 50))
+        actionView.backgroundColor = .clear
+        addSubview(actionView)
     }
 
     /// Sets up the initial constraints of each subview
