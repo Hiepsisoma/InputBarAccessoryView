@@ -478,8 +478,8 @@ open class InputBarAccessoryView: UIView {
         middleContentViewLayoutSet = NSLayoutConstraintSet(
             top:    middleContentViewWrapper.topAnchor.constraint(equalTo: contentView.topAnchor, constant: middleContentViewPadding.top),
             bottom: middleContentViewWrapper.bottomAnchor.constraint(equalTo: bottomStackView.topAnchor, constant: -middleContentViewPadding.bottom),
-            left:   middleContentViewWrapper.leftAnchor.constraint(equalTo: leftStackView.rightAnchor, constant: middleContentViewPadding.left),
-            right:  middleContentViewWrapper.rightAnchor.constraint(equalTo: rightStackView.leftAnchor, constant: -middleContentViewPadding.right)
+            left:   middleContentViewWrapper.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: middleContentViewPadding.left),
+            right:  middleContentViewWrapper.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -middleContentViewPadding.right)
         )
 
         inputTextView.fillSuperview()

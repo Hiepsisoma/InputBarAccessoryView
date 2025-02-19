@@ -21,8 +21,8 @@ final class iMessageInputBar: InputBarAccessoryView {
     }
     
     func configure() {
-        inputTextView.textContainerInset = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 36)
-        inputTextView.placeholderLabelInsets = UIEdgeInsets(top: 8, left: 20, bottom: 8, right: 36)
+        inputTextView.textContainerInset = UIEdgeInsets(top: 10, left: 16, bottom: 10, right: 36)
+        inputTextView.placeholderLabelInsets = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 36)
         if #available(iOS 13, *) {
             inputTextView.layer.borderColor = UIColor.systemGray2.cgColor
         } else {
@@ -31,17 +31,18 @@ final class iMessageInputBar: InputBarAccessoryView {
         inputTextView.layer.borderWidth = 1.0
         inputTextView.layer.cornerRadius = 16.0
         inputTextView.layer.masksToBounds = true
-        inputTextView.scrollIndicatorInsets = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
-        setRightStackViewWidthConstant(to: 38, animated: false)
-        setStackViewItems([sendButton, InputBarButtonItem.fixedSpace(2)], forStack: .right, animated: false)
+        inputTextView.scrollIndicatorInsets = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+        inputTextView.font = .systemFont(ofSize: 20)
+        setRightStackViewWidthConstant(to: 70, animated: false)
+        setStackViewItems([InputBarButtonItem.fixedSpace(16), sendButton, InputBarButtonItem.fixedSpace(16)], forStack: .right, animated: false)
         sendButton.imageView?.backgroundColor = tintColor
-        sendButton.contentEdgeInsets = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
-        sendButton.setSize(CGSize(width: 36, height: 36), animated: false)
+        sendButton.setSize(CGSize(width: 48, height: 48), animated: false)
+        sendButton.contentEdgeInsets = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
         sendButton.image = #imageLiteral(resourceName: "ic_up")
         sendButton.title = nil
         sendButton.imageView?.layer.cornerRadius = 16
         sendButton.backgroundColor = .clear
-        middleContentViewPadding.right = -38
+        middleContentViewPadding = UIEdgeInsets(top: 0.0, left: 16.0, bottom: 0.0, right: 16.0)
         separatorLine.isHidden = true
         isTranslucent = true
     }
