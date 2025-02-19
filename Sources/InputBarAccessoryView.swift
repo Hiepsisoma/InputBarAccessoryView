@@ -227,6 +227,7 @@ open class InputBarAccessoryView: UIView {
     open var topStackViewPadding: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0) {
         didSet {
             updateTopStackViewPadding()
+            addActionView()
         }
     }
 
@@ -444,9 +445,6 @@ open class InputBarAccessoryView: UIView {
         middleContentView = inputTextView
         setStackViewItems([sendButton], forStack: .right, animated: false)
         
-        actionView = UIView(frame: CGRect(x: 0, y: 0, width: 300, height: 50))
-        actionView.backgroundColor = .clear
-        addSubview(actionView)
     }
 
     /// Sets up the initial constraints of each subview
@@ -531,6 +529,14 @@ open class InputBarAccessoryView: UIView {
         backgroundViewLayoutSet?.right?.constant = -frameInsets.right
         updatePadding()
         updateTopStackViewPadding()
+    }
+    
+    private func addActionView() {
+        actionView.removeFromSuperview()
+        if topStackViewPadding.top > 0 {
+            actionView = UIView(frame: CGRect(x: 0, y: 0, width: 300, height: 50))
+            addSubview(actionView)
+        }
     }
 
     /// Updates the constraint constants that correspond to the padding UIEdgeInsets
